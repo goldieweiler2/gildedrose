@@ -33,12 +33,20 @@ There are 4 endpoints available in this application:
 
 POST `/api/gildedrose/1/inventory` - this will refresh the stock inventory. The stock inventory is provided in the resources file `inventory.json` and comprises 3 items with base quantities and prices.
 
+`curl -X POST "http://localhost:8080/api/gildedrose/1/inventory"`
+
 GET `/api/gildedrose/1/inventory` - this will retrieve the inventory. The response is a JSON document containing the items available for purchase. This endpoint is provided as the view and purchase item endpoints require the UUID of the item.
 
-GET `/api/gildedrose/1/item/{itemId}` - this will retrieve the requested item. Each call to this endpoint is monitored and surge pricing is applied when more than 10 requests are received in 60 mins for an item.
+`curl "http://localhost:8080/api/gildedrose/1/inventory"`
+
+GET `/api/gildedrose/1/item/{itemId}` - this will retrieve the requested item. Each call to this endpoint is monitored and surge pricing is applied when more than 10 requests are received in 60 mins for an item. If an unknown or invalid UUID is provided, the user will receive an HTTP 404 response.
+
+`curl "http://localhost:8080/api/gildedrose/1/item/a04b8a12-bc87-49a5-9fa9-7f51b7dcad0f"`
 
 POST `/api/gildedrose/1/item/{itemId}?quantity={quantity}` - this allows a user to purchase an item. The endpoint will return the purchased item and the price it was purchased for. As user cannot purchase more items than are currently in stock.
-Note that this endpoint required authentication credentials (username: `admin`, password: `admin`)
+Note that this endpoint required authentication credentials (username: `admin`, password: `admin`). If there is insufficient stock available, the user will receive an HTTP 400 response.
+
+`curl -X POST --user admin:admin "http://localhost:8080/api/gildedrose/1/item/a04b8a12-bc87-49a5-9fa9-7f51b7dcad0f?quantity=1"`
 
 ### Example Request
 
