@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "uuid": "a04b8a12-bc87-49a5-9fa9-7f51b7dcad0f",
+      "name": "Luxury Coffee",
+      "description": "1kg finest Columbian Coffee Beans",
+      "price": 12,
+      "quantity": 10
+    },
+    {
+      "uuid": "4575aae4-4974-4d67-9b7f-9e5292e0dbd4",
+      "name": "Finest Earl Grey Tea",
+      "description": "Leaf Tea - Earl Grey Tin - 80g",
+      "price": 8,
+      "quantity": 20
+    },
+    {
+      "uuid": "d452c3eb-f965-4ef0-8b26-7a83416e510f",
+      "name": "Millionnaire's Shortbread",
+      "description": "Chocolate, Toffee shortbread pieces - packet",
+      "price": 9,
+      "quantity": 15
+    }
+  ]
+}

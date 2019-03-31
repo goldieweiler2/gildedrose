@@ -1,0 +1,61 @@
+group 'com.gildedrose'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        projectName = 'gildedrose'
+        projectVersion = version
+
+        spring_plugin_version = '1.5.2.RELEASE'
+        lombokVersion = '1.18.6'
+        guavaVersion = '18.0'
+        gsonVersion = '2.8.5'
+        junitVersion = '4.12'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$spring_plugin_version")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+springBoot.layout = 'JAR'
+
+jar {
+    baseName = "${projectName}"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile("org.projectlombok:lombok:${lombokVersion}")
+    compile("com.google.guava:guava:${guavaVersion}")
+    compile("com.google.code.gson:gson:${gsonVersion}")
+
+    testCompile("junit:junit:${junitVersion}")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task distJar(type: Copy) {
+    from "${buildDir}/libs"
+    include "*.jar"
+    into "${buildDir}/distributions"
+}
+
+processResources {
+    filesMatching('**/*.properties') {
+        expand(project.properties)
+    }
+}
